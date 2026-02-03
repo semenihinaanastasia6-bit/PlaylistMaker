@@ -20,11 +20,11 @@ class SearchHistory(private val sharedPreferences: SharedPreferences) {
 
     fun saveTrack(track: Track) {
         val history = getHistory().toMutableList()
-        history.remove(track) // Удалить уже существующий
-        history.add(0, track) // Добавить в начало
+        history.remove(track)
+        history.add(0, track)
 
         if (history.size > maxHistorySize) {
-            history.removeAt(history.size - 1) // Удалить самый старый трек
+            history.removeAt(history.size - 1)
         }
 
         sharedPreferences.edit().putString("search_history", gson.toJson(history)).apply()

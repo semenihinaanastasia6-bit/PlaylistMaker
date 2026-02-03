@@ -35,7 +35,7 @@ class AudioPlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_audio_player)
 
-        // Получаем трек из Intent
+
         val track = intent.getParcelableExtra<Track>(EXTRA_TRACK)
             ?: run {
                 finish()
@@ -67,40 +67,40 @@ class AudioPlayerActivity : AppCompatActivity() {
     }
 
     private fun bindTrack(track: Track) {
-        // Название и исполнитель
+
         trackNameText.text = track.trackName
         artistNameText.text = track.artistName
 
-        // Длительность в формате mm:ss
+
         val duration = SimpleDateFormat("mm:ss", Locale.getDefault())
             .format(track.trackTimeMillis)
         durationValueText.text = duration
 
-        // Альбом (если есть)
+
         if (!track.collectionName.isNullOrBlank()) {
             albumValueText.text = track.collectionName
         } else {
-            albumValueText.text = "" // или можно скрыть всю строку, если захочешь
+            albumValueText.text = ""
         }
 
-        // Год (берём первые 4 символа releaseDate)
+
         yearValueText.text = track.getYear().orEmpty()
 
-        // Жанр
+
         genreValueText.text = track.primaryGenreName.orEmpty()
 
-        // Страна
+
         countryValueText.text = track.country.orEmpty()
 
-        // Прогресс воспроизведения (по заданию пока статичный, логику сделаем позже)
+
         playbackProgressText.text = "0:00"
 
-        // Обложка 512x512 с заглушкой
+
         val coverUrl = track.getCoverArtwork()
         if (!coverUrl.isNullOrEmpty()) {
             Glide.with(this)
                 .load(coverUrl)
-                .placeholder(R.drawable.ic_clear) // лучше поставить свой плейсхолдер
+                .placeholder(R.drawable.ic_clear)
                 .error(R.drawable.ic_clear)
                 .centerCrop()
                 .into(coverImage)
@@ -114,7 +114,7 @@ class AudioPlayerActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        // Остальные кнопки пока без логики — по заданию это не требуется
+
         addToPlaylistButton.setOnClickListener { /* TODO позже */ }
         favoriteButton.setOnClickListener { /* TODO позже */ }
         playButton.setOnClickListener { /* TODO позже */ }

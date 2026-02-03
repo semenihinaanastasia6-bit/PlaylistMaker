@@ -8,10 +8,10 @@ data class Track(
     val artistName: String,
     val trackTimeMillis: Long,
     val artworkUrl100: String?,
-    val collectionName: String?,      // альбом
-    val releaseDate: String?,         // строка даты, берём из неё год
-    val primaryGenreName: String?,    // жанр
-    val country: String?              // страна
+    val collectionName: String?,
+    val releaseDate: String?,
+    val primaryGenreName: String?,
+    val country: String?
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
@@ -50,11 +50,10 @@ data class Track(
         }
     }
 
-    // Ссылка на обложку 512x512 для экрана плеера
+
     fun getCoverArtwork(): String? =
         artworkUrl100?.replaceAfterLast('/', "512x512bb.jpg")
 
-    // Год из releaseDate, если есть
     fun getYear(): String? =
         releaseDate?.takeIf { it.length >= 4 }?.substring(0, 4)
 }

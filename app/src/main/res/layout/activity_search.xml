@@ -82,7 +82,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:visibility="gone" />
 
-    <!-- Placeholder for no results -->
+
     <LinearLayout
         android:id="@+id/noResultsView"
         android:layout_width="match_parent"
@@ -103,7 +103,7 @@
             android:layout_marginTop="8dp" />
     </LinearLayout>
 
-    <!-- Placeholder for error -->
+
     <LinearLayout
         android:id="@+id/errorView"
         android:layout_width="match_parent"

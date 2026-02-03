@@ -133,7 +133,7 @@ class SearchActivity : AppCompatActivity() {
 
     private fun showSearchResults(tracks: List<Track>) {
         recyclerView.adapter = TrackAdapter(tracks) { track ->
-            // сохраняем в историю, если нужно
+
             searchHistory.saveTrack(track)
 
             val intent = Intent(this, AudioPlayerActivity::class.java)

@@ -4,7 +4,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-// Модель данных для ответа от API
+
 data class ApiResponse(
     val resultCount: Int,
     val results: List<Track>
