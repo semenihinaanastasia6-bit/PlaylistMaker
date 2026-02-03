@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Переопределяем только то, что отличается в тёмном режиме -->
+        <item name="android:windowBackground">@color/background_main_dark</item> <!-- Тёмный фон экрана -->
+        <item name="android:textColor">@color/text_primary_dark</item> <!-- Светлый текст -->
+        <item name="colorPrimary">@color/primary_blue_dark</item> <!-- Тёмный основной цвет -->
+        <item name="colorPrimaryDark">@color/primary_blue_dark</item> <!-- Тёмный акцент для статус-бара -->
+        <item name="colorAccent">@color/primary_blue_dark</item> <!-- Тёмный акцент -->
+        <item name="backgroundTint">@color/button_background</item>
+    </style>
+</resources>

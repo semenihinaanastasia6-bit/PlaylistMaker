@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Основные цвета Dark Mode -->
+    <color name="background_main">#090909</color> <!-- Тёмный фон -->
+    <color name="primary_blue">#000000</color>
+    <color name="background_main_dark">#000000</color> <!-- Чёрный фон -->
+    <color name="text_primary_dark">#000000</color> <!-- Белый текст -->
+    <color name="primary_blue_dark">#FFFFFF</color>
+
+    <color name="text_primary">#FFFFFF</color> <!-- Белый текст -->
+    <color name="button_background">#FFFFFF</color> <!-- Тёмно-серый для кнопок -->
+    <color name="icon_tint">#000000</color> <!-- Светло-серый для иконок -->
+    <color name="text_on_button">#000000</color> <!-- Светлый текст на кнопках -->
+    <color name="background_dark">#000000</color>
+    <color name="background_light">#121212</color>
+    <color name="black">#FFFFFF</color>
+    <color name="ripple_color">#FFFFFF</color>
+    <color name="text_light">#FFFFFF</color>
+</resources>

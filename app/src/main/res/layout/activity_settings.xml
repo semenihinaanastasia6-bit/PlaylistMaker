@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fontFamily="@font/ys_text_bold_italic"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:background="@color/background_light">
+
+    <!-- Заголовок с кнопкой "назад" -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="2dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/back_button"
+            style="@style/Widget.App.Icon"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/back"
+            android:src="@drawable/ic_arrow_back" />
+
+        <TextView
+            style="@style/TextAppearance.App.Settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/settings_title" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/Widget.App.SettingRow"
+        android:layout_marginBottom="8dp">
+        <TextView
+            style="@style/TextAppearance.App.Body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/dark_theme" />
+        <Switch
+            android:id="@+id/theme_switch"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:checked="false"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        style="@style/Widget.App.SettingRow"
+        android:layout_marginBottom="8dp"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            style="@style/TextAppearance.App.Body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/share_app" />
+
+        <ImageView
+            android:id="@+id/share_button"
+            style="@style/Widget.App.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_share" />
+
+    </LinearLayout>
+
+    <!-- Строка: Поддержка -->
+    <LinearLayout
+        style="@style/Widget.App.SettingRow"
+        android:layout_marginBottom="8dp">
+        <TextView
+            style="@style/TextAppearance.App.Body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/support" />
+
+        <ImageView
+            android:id="@+id/support_button"
+            style="@style/Widget.App.Icon"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_support" />
+    </LinearLayout>
+
+    <!-- Строка: Пользовательское соглашение -->
+    <LinearLayout
+        android:id="@+id/agreement_button"
+        style="@style/Widget.App.SettingRow">
+        <TextView
+            style="@style/TextAppearance.App.Body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/user_agreement" />
+
+        <ImageView
+
+            style="@style/Widget.App.Icon"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_arrow_right" />
+    </LinearLayout>
+</LinearLayout>

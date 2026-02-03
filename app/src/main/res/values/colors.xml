@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background_main">#0A57CF</color>
+    <color name="button_background">#FFFFFF</color>
+    <color name="text_primary">#000000</color>
+    <color name="background_light">#FFFFFF</color>
+    <color name="text_on_button">#000000</color>
+    <color name="icon_tint">#000000</color>
+       <color name="black">#000000</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="background_dark">#000000</color>
+    <color name="ripple_color">#FFFFFF</color>
+    <color name="primary_blue">#1E88E5</color>
+       <color name="hint_color_dark">#000000</color>
+    <color name="background_main_dark">#000000</color>
+    <color name="text_primary_dark">#FFFFFF</color>
+    <color name="primary_blue_dark">#212121</color>
+    <color name="text_light">#000000</color>
+        <color name="hint_color_light">#808080</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="hint_color">@color/hint_color_light</color>
+     <color name="colorPrimaryDark">#303F9F</color>
+       <color name="colorSecondaryText">#757575</color>
+
+</resources>

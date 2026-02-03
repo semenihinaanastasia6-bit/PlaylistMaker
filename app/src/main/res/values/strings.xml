@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Playlist maker</string>
+    <string name="search">Поиск</string>
+    <string name="medialibrary">Медиатека</string>
+    <string name="settings">Настройки</string>
+    <string name="settings_title">Настройки</string>
+    <string name="dark_theme">Тёмная тема</string>
+    <string name="share_app">Поделиться приложением</string>
+    <string name="support">Написать в поддержку</string>
+    <string name="user_agreement">Пользовательское соглашение</string>
+    <string name="back">Назад</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="share_message">Попробуйте приложение Playlist Maker от ИВТ-221!</string>
+    <string name="email_subject">Сообщение разработчикам Playlist Maker</string>
+    <string name="email_body">Работает!!</string>
+    <string name="agreement_url">https://vivt.ru///</string>
+    <!-- Описание обложки -->
+    <string name="cover_image">Обложка трека</string>
+    <!-- Кнопки под обложкой -->
+    <string name="add_to_playlist">Добавить в плейлист</string>
+    <string name="play">Воспроизвести</string>
+    <string name="favorite">Избранное</string>
+    <!-- Подписи к полям информации о треке -->
+    <string name="duration">Длительность</string>
+    <string name="album">Альбом</string>
+    <string name="year">Год</string>
+    <string name="genre">Жанр</string>
+    <string name="country">Страна</string>
+
+</resources>

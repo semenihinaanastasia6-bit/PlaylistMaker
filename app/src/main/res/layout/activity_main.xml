@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:fontFamily="@font/ys_text_bold_italic"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/background_main">
+
+
+    <TextView
+        android:id="@+id/app_title"
+        style="@style/TextAppearance.App.Main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/app_name" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="16dp"
+>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/search_button"
+                style="@style/Widget.App.Button"
+                android:layout_width="match_parent"
+                android:layout_height="232dp"
+                android:gravity="center"
+                android:stateListAnimator="@null"
+                android:text="@string/search"
+                app:icon="@drawable/ic_search"
+                app:iconPadding="8dp" />
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="16dp"
+>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/media_button"
+                style="@style/Widget.App.Button"
+                android:layout_width="match_parent"
+                android:layout_height="249dp"
+                android:gravity="center"
+                android:stateListAnimator="@null"
+                android:text="@string/medialibrary"
+                app:icon="@drawable/ic_library"
+                app:iconPadding="8dp" />
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="16dp"
+>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/settings_button"
+                style="@style/Widget.App.Button"
+                android:layout_width="match_parent"
+                android:layout_height="251dp"
+                android:gravity="center"
+                android:stateListAnimator="@null"
+                android:text="@string/settings"
+                app:icon="@drawable/ic_settings"
+                app:iconPadding="8dp" />
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</LinearLayout>
