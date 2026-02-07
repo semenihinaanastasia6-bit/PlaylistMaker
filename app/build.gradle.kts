@@ -71,18 +71,18 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
 
-    // Gson
+
     implementation(libs.gson)
 
-    // Compose BOM
+
     implementation(platform(libs.androidx.compose.bom))
 
-    // Compose dependencies через BOM
+
     implementation(libs.ui)
     implementation(libs.androidx.compose.ui.ui.tooling)
     implementation(libs.ui.graphics)
     implementation(libs.material3)
-    implementation(libs.androidx.material3.icons)
+    //implementation(libs.androidx.material3.icons)
 
     // Testing
     testImplementation(libs.junit)
