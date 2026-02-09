@@ -3,11 +3,14 @@ package com.example.playlistmaker
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -18,9 +21,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SearchActivity : AppCompatActivity() {
-
     private lateinit var searchView: SearchView
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var clearHistoryButton: Button
     private lateinit var noResultsView: LinearLayout
@@ -29,13 +30,21 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var searchHistoryTitle: TextView
     private lateinit var apiService: ApiService
     private lateinit var searchHistory: SearchHistory
+    private lateinit var progressBar: ProgressBar
 
+    // Declare lastQuery and lastRequestHadError
     private var lastQuery: String? = null
-    private var lastRequestHadError: Boolean = false
+    private var lastRequestHadError = false
+
+    // Declare and initialize debounceHandler and debounceRunnable
+    private lateinit var debounceHandler: Handler
+    private lateinit var debounceRunnable: Runnable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+
+        // Initialize views
         searchHistoryTitle = findViewById(R.id.searchHistoryTitle)
         searchView = findViewById(R.id.searchView)
         recyclerView = findViewById(R.id.recyclerView)
@@ -43,39 +52,37 @@ class SearchActivity : AppCompatActivity() {
         noResultsView = findViewById(R.id.noResultsView)
         errorView = findViewById(R.id.errorView)
         retryButton = findViewById(R.id.retryButton)
+        progressBar = findViewById(R.id.progressBar)
+
         val backButton = findViewById<ImageButton>(R.id.backbutton)
         backButton.setOnClickListener { finish() }
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        // Initialize API service and Shared Preferences
         apiService = ApiClient.apiService
-
-        val sharedPrefs = getSharedPreferences("search_prefs", Context.MODE_PRIVATE)
-        searchHistory = SearchHistory(sharedPrefs)
+        searchHistory = SearchHistory(getSharedPreferences("search_prefs", Context.MODE_PRIVATE))
 
         showHistory()
 
+        debounceHandler = Handler(Looper.getMainLooper())
+        debounceRunnable = Runnable {} // Initialize debounceRunnable
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                val text = query?.trim().orEmpty()
-                if (text.isNotEmpty()) {
-                    performSearch(text)
-                }
-
-                return true
-            }
+            override fun onQueryTextSubmit(query: String?): Boolean = true
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                val text = newText?.trim().orEmpty()
+                val text = newText?.trim() ?: return true // Ensure non-null
                 if (text.isEmpty()) {
-
                     showHistory()
+                } else {
+                    debounceHandler.removeCallbacks(debounceRunnable)
+                    debounceRunnable = Runnable { performSearch(text) }
+                    debounceHandler.postDelayed(debounceRunnable, 2000)
                 }
                 return true
             }
         })
-
 
         retryButton.setOnClickListener {
             if (lastRequestHadError) {
@@ -83,36 +90,26 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
-
         clearHistoryButton.setOnClickListener {
             searchHistory.clearHistory()
             showHistory()
         }
     }
 
+    // Method for searching
     private fun performSearch(query: String) {
         lastQuery = query
         lastRequestHadError = false
-
-        Log.d("API_REQUEST", "Searching for: $query")
-
-
-        noResultsView.visibility = View.GONE
-        errorView.visibility = View.GONE
+        progressBar.visibility = View.VISIBLE // Show ProgressBar
 
         apiService.search(query).enqueue(object : Callback<ApiResponse> {
             override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
-                Log.d("API_RESPONSE_CODE", "Response code: ${response.code()}")
-
+                progressBar.visibility = View.GONE // Hide ProgressBar
                 if (response.isSuccessful) {
                     val apiResponse = response.body()
-                    Log.d("API_RESPONSE", "Response body: $apiResponse")
-
                     val tracks = apiResponse?.results ?: emptyList()
-
                     if (tracks.isNotEmpty()) {
                         showSearchResults(tracks)
-                        lastRequestHadError = false
                     } else {
                         showNoResultsView()
                     }
@@ -125,6 +122,7 @@ class SearchActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
                 Log.e("API_FAILURE", "Failure: ${t.message}")
+                progressBar.visibility = View.GONE // Hide ProgressBar
                 lastRequestHadError = true
                 showErrorView()
             }
@@ -133,14 +131,11 @@ class SearchActivity : AppCompatActivity() {
 
     private fun showSearchResults(tracks: List<Track>) {
         recyclerView.adapter = TrackAdapter(tracks) { track ->
-
             searchHistory.saveTrack(track)
-
             val intent = Intent(this, AudioPlayerActivity::class.java)
             intent.putExtra(AudioPlayerActivity.EXTRA_TRACK, track)
             startActivity(intent)
         }
-
         recyclerView.visibility = View.VISIBLE
         noResultsView.visibility = View.GONE
         errorView.visibility = View.GONE
@@ -163,24 +158,24 @@ class SearchActivity : AppCompatActivity() {
 
     private fun showHistory() {
         val historyList = searchHistory.getHistory()
-
+        searchHistoryTitle.visibility = if (historyList.isNotEmpty()) View.VISIBLE else View.GONE
         if (historyList.isNotEmpty()) {
             recyclerView.adapter = TrackAdapter(historyList) { track ->
                 searchHistory.saveTrack(track)
-
                 val intent = Intent(this, AudioPlayerActivity::class.java)
                 intent.putExtra(AudioPlayerActivity.EXTRA_TRACK, track)
                 startActivity(intent)
             }
-
             recyclerView.visibility = View.VISIBLE
             clearHistoryButton.visibility = View.VISIBLE
+            noResultsView.visibility = View.GONE
+            errorView.visibility = View.GONE
         } else {
             recyclerView.visibility = View.GONE
             clearHistoryButton.visibility = View.GONE
+            noResultsView.visibility = View.GONE
+            errorView.visibility = View.GONE
+            searchHistoryTitle.visibility = View.GONE
         }
-
-        noResultsView.visibility = View.GONE
-        errorView.visibility = View.GONE
     }
 }
