@@ -1,6 +1,6 @@
 [versions]
 activityKtx = "1.7.2"
-agp = "8.13.2"
+agp = "8.12.1"
 androidxJunit = "1.1.5"
 cardview = "1.0.0"
 appcompat = "1.6.1"
