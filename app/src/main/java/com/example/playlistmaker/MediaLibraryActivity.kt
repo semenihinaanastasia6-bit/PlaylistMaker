@@ -20,16 +20,16 @@ class MediaLibraryActivity : AppCompatActivity() {
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_search -> {
-                    // Открываем экран поиска
+
                     startActivity(Intent(this, SearchActivity::class.java))
                     true
                 }
                 R.id.action_media -> {
-                    // Остаёмся в текущей активности (медиатека)
+
                     true
                 }
                 R.id.action_settings -> {
-                    // Открываем экран настроек
+
                     startActivity(Intent(this, SettingsActivity::class.java))
                     true
                 }

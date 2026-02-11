@@ -32,11 +32,10 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var searchHistory: SearchHistory
     private lateinit var progressBar: ProgressBar
 
-    // Declare lastQuery and lastRequestHadError
+
     private var lastQuery: String? = null
     private var lastRequestHadError = false
 
-    // Declare and initialize debounceHandler and debounceRunnable
     private lateinit var debounceHandler: Handler
     private lateinit var debounceRunnable: Runnable
 
@@ -59,7 +58,7 @@ class SearchActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Initialize API service and Shared Preferences
+
         apiService = ApiClient.apiService
         searchHistory = SearchHistory(getSharedPreferences("search_prefs", Context.MODE_PRIVATE))
 
@@ -67,7 +66,6 @@ class SearchActivity : AppCompatActivity() {
 
         debounceHandler = Handler(Looper.getMainLooper())
         debounceRunnable = Runnable {} // Initialize debounceRunnable
-
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean = true
 
@@ -96,15 +94,15 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    // Method for searching
+
     private fun performSearch(query: String) {
         lastQuery = query
         lastRequestHadError = false
-        progressBar.visibility = View.VISIBLE // Show ProgressBar
+        progressBar.visibility = View.VISIBLE
 
         apiService.search(query).enqueue(object : Callback<ApiResponse> {
             override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
-                progressBar.visibility = View.GONE // Hide ProgressBar
+                progressBar.visibility = View.GONE
                 if (response.isSuccessful) {
                     val apiResponse = response.body()
                     val tracks = apiResponse?.results ?: emptyList()

@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     tools:context=".MediaLibraryActivity">
 
-    <!-- Заголовок "Медиатека" -->
+
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"/>
 
-    <!-- Табы: "Избранные треки" / "Плейлисты" -->
+
     <LinearLayout
         android:id="@+id/ll_tabs"
         android:layout_width="match_parent"
