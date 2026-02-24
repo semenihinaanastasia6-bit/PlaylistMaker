@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.08" />
+        app:layout_constraintGuide_begin="33dp" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -115,6 +115,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginTop="32dp"
+
         android:background="@drawable/round_button"
         android:contentDescription="@string/favorite"
         android:src="@drawable/ic_favorite_border"
@@ -129,14 +130,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="0:00"
-        android:textSize="16sp"
         android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@id/playButton"
-        app:layout_constraintStart_toStartOf="@id/left_guideline"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@id/right_guideline"
-        app:layout_constraintHorizontal_bias="0.5" />
-
-
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@id/left_guideline"
+        app:layout_constraintTop_toBottomOf="@id/playButton" />
 
     <TextView
         android:id="@+id/durationTitleText"

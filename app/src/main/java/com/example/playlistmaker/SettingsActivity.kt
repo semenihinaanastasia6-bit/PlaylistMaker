@@ -26,10 +26,10 @@ class SettingsActivity : ComponentActivity() {
         val themeSwitch = findViewById<Switch>(R.id.theme_switch)
 
         val isDarkTheme = getSharedPreferences("themePrefs", MODE_PRIVATE)
-            .getBoolean("darkTheme", false) // false — светлая тема по умолчанию
+            .getBoolean("darkTheme", false)
 
         themeSwitch.isChecked = getSharedPreferences("themePrefs", MODE_PRIVATE)
-            .getBoolean("darkTheme", false) // false — светлая тема по умолчанию
+            .getBoolean("darkTheme", false)
 
         themeSwitch.setOnCheckedChangeListener { _, isChecked ->
             AppCompatDelegate.setDefaultNightMode(

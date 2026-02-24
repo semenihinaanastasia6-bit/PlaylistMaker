@@ -32,7 +32,7 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var searchHistory: SearchHistory
     private lateinit var progressBar: ProgressBar
 
-
+    private lateinit var backButton: ImageButton
     private var lastQuery: String? = null
     private var lastRequestHadError = false
 
@@ -43,7 +43,6 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        // Initialize views
         searchHistoryTitle = findViewById(R.id.searchHistoryTitle)
         searchView = findViewById(R.id.searchView)
         recyclerView = findViewById(R.id.recyclerView)
@@ -53,8 +52,10 @@ class SearchActivity : AppCompatActivity() {
         retryButton = findViewById(R.id.retryButton)
         progressBar = findViewById(R.id.progressBar)
 
-        val backButton = findViewById<ImageButton>(R.id.backbutton)
-        backButton.setOnClickListener { finish() }
+        backButton = findViewById(R.id.backButton)
+        backButton.setOnClickListener {
+            onBackPressed()
+        }
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -65,12 +66,12 @@ class SearchActivity : AppCompatActivity() {
         showHistory()
 
         debounceHandler = Handler(Looper.getMainLooper())
-        debounceRunnable = Runnable {} // Initialize debounceRunnable
+        debounceRunnable = Runnable {}
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean = true
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                val text = newText?.trim() ?: return true // Ensure non-null
+                val text = newText?.trim() ?: return true
                 if (text.isEmpty()) {
                     showHistory()
                 } else {

@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -76,14 +76,17 @@ dependencies {
 
 
     implementation(platform(libs.androidx.compose.bom))
-
-
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
     implementation(libs.ui)
     implementation(libs.androidx.compose.ui.ui.tooling)
     implementation(libs.ui.graphics)
     implementation(libs.material3)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    //implementation(libs.androidx.room.common.jvm)
     //implementation(libs.androidx.material3.icons)
-
+    //noinspection KaptUsageInsteadOfKsp
+    kapt(libs.androidx.room.compiler)
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

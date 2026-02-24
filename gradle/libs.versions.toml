@@ -24,6 +24,8 @@ lifecycleViewmodelKtx = "2.6.2"
 material = "1.10.0"
 recyclerview = "1.3.0"
 retrofit = "2.9.0"
+room = "2.5.0"
+lifecycleViewmodelKtxVersion = "2.10.0"
 
 
 [libraries]
@@ -44,6 +46,9 @@ androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-view
 androidx-material3-icons = { module = "androidx.compose.material3:material3-icons" }
 androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
 
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
@@ -62,6 +67,8 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 ui = { module = "androidx.compose.ui:ui" }
 ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
 ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtxVersion" }
+
 
 
 [plugins]

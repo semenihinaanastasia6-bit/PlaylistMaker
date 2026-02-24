@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class TrackAdapter(
-    private val tracks: List<Track>,
+    private var tracks: List<Track>,
     private val onItemClick: (Track) -> Unit
 ) : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
 
@@ -22,8 +22,8 @@ class TrackAdapter(
         val artwork: ImageView = view.findViewById(R.id.artwork)
 
         init {
-            view.setOnClickListener {
-                val position = bindingAdapterPosition
+            itemView.setOnClickListener {
+                val position = absoluteAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     onItemClick(tracks[position])
                 }
@@ -43,8 +43,8 @@ class TrackAdapter(
         holder.trackName.text = track.trackName
         holder.artistName.text = track.artistName
 
-        holder.trackTime.text =
-            SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis)
+
+        holder.trackTime.text = formatDuration(track.trackTimeMillis)
 
         val artworkUrl = track.artworkUrl100
         if (!artworkUrl.isNullOrEmpty()) {
@@ -60,4 +60,18 @@ class TrackAdapter(
     }
 
     override fun getItemCount() = tracks.size
+
+
+    fun submitList(newTracks: List<Track>) {
+        this.tracks = newTracks
+        notifyDataSetChanged()
+    }
+
+
+    private fun formatDuration(millis: Long): String {
+        val seconds = (millis / 1000).toInt()
+        val minutes = seconds / 60
+        val secs = seconds % 60
+        return String.format("%02d:%02d", minutes, secs)
+    }
 }

@@ -3,6 +3,7 @@ package com.example.playlistmaker
 import android.os.Parcel
 import android.os.Parcelable
 
+
 data class Track(
     val trackName: String,
     val artistName: String,
@@ -57,4 +58,18 @@ data class Track(
 
     fun getYear(): String? =
         releaseDate?.takeIf { it.length >= 4 }?.substring(0, 4)
+}
+
+fun FavoriteTrackEntity.toTrack(): Track {
+    return Track(
+        trackName = this.trackName,
+        artistName = this.artistName,
+        trackTimeMillis = this.trackTimeMillis,
+        artworkUrl100 = this.artworkUrl100,
+        collectionName = this.collectionName,
+        releaseDate = this.releaseDate,
+        primaryGenreName = this.primaryGenreName,
+        country = this.country,
+        previewUrl = this.previewUrl
+    )
 }
