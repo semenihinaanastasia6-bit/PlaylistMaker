@@ -39,6 +39,7 @@ class AudioPlayerActivity : AppCompatActivity() {
     private lateinit var backButton: ImageButton
     private lateinit var playbackProgressText: TextView
     private val updateHandler = Handler(Looper.getMainLooper())
+    private var currentIsFavorite = false
 
     private val updateRunnable: Runnable = object : Runnable {
         override fun run() {
@@ -134,12 +135,11 @@ class AudioPlayerActivity : AppCompatActivity() {
 
     private fun toggleFavorite(track: Track) {
         lifecycleScope.launch {
+            if (currentIsFavorite) {
 
-            val isFavorite = viewModel.isFavorite(track.previewUrl).value ?: false
-            if (isFavorite) {
                 viewModel.removeTrackFromFavoritesByUrl(track.previewUrl)
-
             } else {
+
                 val entity = FavoriteTrackEntity(
                     previewUrl = track.previewUrl,
                     trackName = track.trackName,
@@ -152,21 +152,18 @@ class AudioPlayerActivity : AppCompatActivity() {
                     country = track.country
                 )
                 viewModel.addTrackToFavorites(entity)
-
-            }
-
-
-            viewModel.isFavorite(track.previewUrl).observe(this@AudioPlayerActivity) { newFavoriteStatus ->
-                updateFavoriteButton(newFavoriteStatus)
             }
         }
     }
+
 
     private fun checkIfTrackIsFavorite(previewUrl: String) {
         viewModel.isFavorite(previewUrl).observe(this) { isFavorite ->
+            currentIsFavorite = isFavorite
             updateFavoriteButton(isFavorite)
         }
     }
+
 
     private fun updateFavoriteButton(isFavorite: Boolean) {
         Log.d("UIUpdate", "Updating button: isFavorite -> $isFavorite")
