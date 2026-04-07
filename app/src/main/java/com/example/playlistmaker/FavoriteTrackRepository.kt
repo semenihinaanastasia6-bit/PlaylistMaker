@@ -19,12 +19,7 @@ class FavoriteTrackRepository(private val favoriteTrackDao: FavoriteTrackDao) {
         }
     }
 
-    suspend fun removeTrackFromFavorites(track: FavoriteTrackEntity) {
-        withContext(Dispatchers.IO) {
-            val result = favoriteTrackDao.removeFromFavorites(track)
-            Log.d("FavoriteTrackRepo", "Track removed: ${track.trackName}, Rows affected: $result")
-        }
-    }
+
     fun isFavorite(url: String): LiveData<Boolean> {
         return favoriteTrackDao.isFavorite(url)
     }
