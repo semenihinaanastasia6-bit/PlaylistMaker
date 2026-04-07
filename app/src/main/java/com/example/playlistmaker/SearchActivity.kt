@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package com.example.playlistmaker
 
 import android.content.Context
@@ -123,7 +121,7 @@ class SearchActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
                 Log.e("API_FAILURE", "Failure: ${t.message}")
-                progressBar.visibility = View.GONE
+                progressBar.visibility = View.GONE // Hide ProgressBar
                 lastRequestHadError = true
                 showErrorView()
             }

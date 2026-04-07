@@ -6,7 +6,6 @@ import androidx.room.*
 @Entity(tableName = "favorite_tracks")
 data class FavoriteTrackEntity(
     @PrimaryKey val previewUrl: String,
-    val trackId: String,
     val trackName: String,
     val artistName: String,
     val trackTimeMillis: Long,
@@ -20,9 +19,7 @@ data class FavoriteTrackEntity(
 
 
 @Dao
-
 interface FavoriteTrackDao {
-
     @Query("SELECT * FROM favorite_tracks ORDER BY addedAt DESC")
     fun getAllFavorites(): LiveData<List<FavoriteTrackEntity>>
 
@@ -32,8 +29,8 @@ interface FavoriteTrackDao {
     @Delete
     fun removeFromFavorites(track: FavoriteTrackEntity): Int
 
-    @Query("SELECT EXISTS(SELECT 1 FROM favorite_tracks WHERE previewUrl = :previewUrl)")
-    fun isFavorite(previewUrl: String): LiveData<Boolean>
+    @Query("SELECT EXISTS(SELECT 1 FROM favorite_tracks WHERE previewUrl = :url)")
+    fun isFavorite(url: String): LiveData<Boolean>
 
     @Query("DELETE FROM favorite_tracks WHERE previewUrl = :previewUrl")
     fun deleteByUrl(previewUrl: String): Int

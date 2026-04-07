@@ -8,43 +8,51 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Switch
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
 
-class SettingsActivity : AppCompatActivity() {
+
+class SettingsActivity : ComponentActivity() {
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
         val backButton = findViewById<ImageButton>(R.id.back_button)
-        backButton.setOnClickListener { onBackPressed() }
-
+        backButton.setOnClickListener { finish() }
         val shareButton = findViewById<ImageView>(R.id.share_button)
+
         val themeSwitch = findViewById<Switch>(R.id.theme_switch)
 
-        val prefs = getSharedPreferences("themePrefs", MODE_PRIVATE)
-        themeSwitch.isChecked = prefs.getBoolean("darkTheme", false)
+        val isDarkTheme = getSharedPreferences("themePrefs", MODE_PRIVATE)
+            .getBoolean("darkTheme", false)
+
+        themeSwitch.isChecked = getSharedPreferences("themePrefs", MODE_PRIVATE)
+            .getBoolean("darkTheme", false)
 
         themeSwitch.setOnCheckedChangeListener { _, isChecked ->
             AppCompatDelegate.setDefaultNightMode(
                 if (isChecked) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
             )
-            prefs.edit { putBoolean("darkTheme", isChecked) }
+            getSharedPreferences("themePrefs", MODE_PRIVATE).edit {
+                putBoolean("darkTheme", isChecked)
+            }
             recreate()
         }
-
         shareButton.setOnClickListener {
             val sendIntent = Intent().apply {
                 action = Intent.ACTION_SEND
                 putExtra(Intent.EXTRA_TEXT, getString(R.string.share_message))
                 type = "text/plain"
             }
-            startActivity(Intent.createChooser(sendIntent, null))
-        }
 
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
         val supportButton = findViewById<ImageView>(R.id.support_button)
+
+
         supportButton.setOnClickListener {
             val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("mailto:")
@@ -52,10 +60,12 @@ class SettingsActivity : AppCompatActivity() {
                 putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject))
                 putExtra(Intent.EXTRA_TEXT, getString(R.string.email_body))
             }
+
             startActivity(emailIntent)
         }
-
         val agreementButton = findViewById<LinearLayout>(R.id.agreement_button)
+
+
         agreementButton.setOnClickListener {
             val url = getString(R.string.agreement_url)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
@@ -63,3 +73,5 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 }
+
+

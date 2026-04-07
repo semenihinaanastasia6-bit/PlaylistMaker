@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("org.jetbrains.kotlin.kapt")
-    id("kotlin-parcelize")
 }
 
 android {
@@ -49,7 +48,7 @@ dependencies {
     }
 
     // Lifecycle
-
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
@@ -84,16 +83,16 @@ dependencies {
     implementation(libs.ui.graphics)
     implementation(libs.material3)
     implementation(libs.lifecycle.viewmodel.ktx)
-    implementation(libs.recyclerview)
-    implementation(libs.kotlinx.coroutines.core)
+    //implementation(libs.androidx.room.common.jvm)
+    //implementation(libs.androidx.material3.icons)
+    //noinspection KaptUsageInsteadOfKsp
     kapt(libs.androidx.room.compiler)
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.ui.test.junit4)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.kotlin.stdlib)
+
     // Debug dependencies
     debugImplementation(libs.androidx.compose.ui.ui.tooling2)
     debugImplementation(libs.ui.test.manifest)

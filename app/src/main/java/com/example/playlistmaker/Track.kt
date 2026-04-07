@@ -3,15 +3,8 @@ package com.example.playlistmaker
 import android.os.Parcel
 import android.os.Parcelable
 
-import androidx.room.Entity
 
-import androidx.room.PrimaryKey
-
-@Entity(tableName = "tracks")
 data class Track(
-    @PrimaryKey
-    val trackId: String,
-
     val trackName: String,
     val artistName: String,
     val trackTimeMillis: Long,
@@ -25,18 +18,16 @@ data class Track(
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
-        parcel.readString() ?: "",
         parcel.readLong(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString() ?: "",
+        parcel.readString(),
         parcel.readString() ?: ""
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(trackId)
         parcel.writeString(trackName)
         parcel.writeString(artistName)
         parcel.writeLong(trackTimeMillis)
@@ -71,7 +62,6 @@ data class Track(
 
 fun FavoriteTrackEntity.toTrack(): Track {
     return Track(
-        trackId = this.trackId,
         trackName = this.trackName,
         artistName = this.artistName,
         trackTimeMillis = this.trackTimeMillis,
@@ -83,4 +73,3 @@ fun FavoriteTrackEntity.toTrack(): Track {
         previewUrl = this.previewUrl
     )
 }
-
