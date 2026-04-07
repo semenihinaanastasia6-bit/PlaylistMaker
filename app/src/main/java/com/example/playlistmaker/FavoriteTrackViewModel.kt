@@ -24,11 +24,7 @@ class FavoriteTrackViewModel(application: Application) : AndroidViewModel(applic
         }
     }
 
-    fun removeTrackFromFavorites(track: FavoriteTrackEntity) {
-        viewModelScope.launch {
-            repository.removeTrackFromFavorites(track)
-        }
-    }
+
 
     fun isFavorite(url: String): LiveData<Boolean> {
         return repository.isFavorite(url)
@@ -56,7 +52,5 @@ class FavoriteTrackViewModel(application: Application) : AndroidViewModel(applic
             repository.removeTrackByUrl(previewUrl)
         }
     }
-    suspend fun removeTrackByUrl(previewUrl: String): Int {
-        return repository.removeTrackByUrl(previewUrl)
-    }
+
 }

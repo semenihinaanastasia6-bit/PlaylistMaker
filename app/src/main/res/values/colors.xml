@@ -21,5 +21,5 @@
     <color name="hint_color">@color/hint_color_light</color>
      <color name="colorPrimaryDark">#303F9F</color>
        <color name="colorSecondaryText">#757575</color>
-
+    <color name="gray">#9E9E9E</color>
 </resources>

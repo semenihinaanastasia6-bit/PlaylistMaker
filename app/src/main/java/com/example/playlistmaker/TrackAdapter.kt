@@ -7,8 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import java.text.SimpleDateFormat
-import java.util.Locale
+
 
 class TrackAdapter(
     private var tracks: List<Track>,
@@ -61,7 +60,7 @@ class TrackAdapter(
 
     override fun getItemCount() = tracks.size
 
-
+    fun getCurrentList(): List<Track> = tracks
     fun submitList(newTracks: List<Track>) {
         this.tracks = newTracks
         notifyDataSetChanged()
@@ -74,4 +73,8 @@ class TrackAdapter(
         val secs = seconds % 60
         return String.format("%02d:%02d", minutes, secs)
     }
+}
+class TrackRepository(private val trackDao: TrackDao) {
+    fun insertTrack(track: Track): Long = trackDao.insertTrack(track)
+    fun trackExists(trackId: String): Boolean = trackDao.trackExists(trackId)
 }

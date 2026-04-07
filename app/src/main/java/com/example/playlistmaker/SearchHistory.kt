@@ -3,6 +3,7 @@ package com.example.playlistmaker
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import androidx.core.content.edit
 
 class SearchHistory(private val sharedPreferences: SharedPreferences) {
     private val gson = Gson()
@@ -27,11 +28,11 @@ class SearchHistory(private val sharedPreferences: SharedPreferences) {
             history.removeAt(history.size - 1)
         }
 
-        sharedPreferences.edit().putString("search_history", gson.toJson(history)).apply()
+        sharedPreferences.edit { putString("search_history", gson.toJson(history)) }
     }
 
     fun clearHistory() {
-        sharedPreferences.edit().remove("search_history").apply()
+        sharedPreferences.edit { remove("search_history") }
     }
 
     fun contains(track: Track): Boolean {
@@ -40,9 +41,5 @@ class SearchHistory(private val sharedPreferences: SharedPreferences) {
     }
 
 
-    fun remove(track: Track) {
-        val history = getHistory().toMutableList()
-        history.remove(track)
-        sharedPreferences.edit().putString("search_history", gson.toJson(history)).apply()
-    }
+
 }
